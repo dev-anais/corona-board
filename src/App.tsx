@@ -1,78 +1,8 @@
 import React, { useEffect, FC, useState } from "react";
-import styled from "styled-components";
-import axios, { AxiosResponse } from "axios";
-import { SummaryCovidResponse, SpecificInfo, Country } from "./types";
+import { getSummaryCovidData } from "./api";
+import { SpecificInfo, Country } from "./types";
+import * as S from "./style";
 import "./App.css";
-
-const SelectWrapper = styled.div`
-  min-height: 4vh;
-`;
-
-const CountriesSelect = styled.select`
-  width: 20vw;
-  float: right;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  background: #000000;
-  opacity: 0.9;
-  color: green;
-  padding: 8px;
-  font-weight: bold;
-  border-color: green;
-`;
-
-const TitlePanel = styled.div`
-  width: 80vw;
-  margin: 30px auto;
-  border-radius: 4px;
-  border: 1px solid black;
-  padding: 1rem;
-  background: #000000;
-  opacity: 0.9;
-`;
-
-const Title = styled.p`
-  font-size: 30px;
-  font-weight: bold;
-  color: white;
-`;
-
-const MainInfoWrapper = styled.div`
-  background-color: rgba(0, 0, 0, 0.9);
-  width: 90%;
-  margin: 30px auto;
-  border-radius: 4px;
-  border: 1px solid black;
-  display: flex;
-  justify-content: space-around;
-`;
-
-const SpecificInfoWrapper = styled.div``;
-
-const SpecificInfoTitle = styled.p`
-  font-size: 16px;
-  color: gray;
-`;
-const SpecificInfoIncreaseNum = styled.p`
-  font-size: 24px;
-  color: red;
-`;
-
-const SpecificInfoTotalNum = styled.p`
-  font-size: 16px;
-  color: white;
-`;
-const InfoText = styled.p`
-  font-size: 14px;
-  color: red;
-  align-self: center;
-`;
-
-// api
-function getSummaryCovidData(): Promise<AxiosResponse<SummaryCovidResponse>> {
-  const url = "https://api.covid19api.com/summary";
-  return axios.get(url);
-}
 
 const App: FC = () => {
   async function initData() {
@@ -93,7 +23,10 @@ const App: FC = () => {
     TotalConfirmed: 0,
     TotalDeaths: 0,
     TotalRecovered: 0,
+    Date: "",
+    CountryCode: "",
   });
+
   const [selectedInfo, setSelectedInfo] = useState<SpecificInfo>();
 
   useEffect(() => {
@@ -110,65 +43,87 @@ const App: FC = () => {
       setSelectedInfo(selectedCountry);
     }
   };
+
   return (
     <div className="App">
-      <TitlePanel>
-        <SelectWrapper>
-          <CountriesSelect onChange={changeCountry}>
+      <S.TitlePanel>
+        <S.SelectWrapper>
+          <S.CountriesSelect onChange={changeCountry}>
             <option></option>
             {countriesInfo?.map((countryInfo, idx) => (
               <option key={idx} value={countryInfo.CountryCode}>
                 {countryInfo.Country}
               </option>
             ))}
-          </CountriesSelect>
-        </SelectWrapper>
-        <Title> 코로나바이러스감염증-19</Title>
-        <MainInfoWrapper>
-          <SpecificInfoWrapper>
-            <SpecificInfoTitle> 전세계 확진환자 </SpecificInfoTitle>
-            <SpecificInfoIncreaseNum>
+          </S.CountriesSelect>
+        </S.SelectWrapper>
+        <S.Title> 코로나바이러스감염증-19</S.Title>
+        <S.MainInfoWrapper>
+          <S.SpecificInfoWrapper>
+            <S.SpecificInfoTitle> 전세계 확진환자 </S.SpecificInfoTitle>
+            <S.SpecificInfoIncreaseNum>
               {globalInfo.NewConfirmed}
-            </SpecificInfoIncreaseNum>
-            <SpecificInfoTotalNum>
+            </S.SpecificInfoIncreaseNum>
+            <S.SpecificInfoTotalNum>
               {globalInfo.TotalConfirmed}
-            </SpecificInfoTotalNum>
-          </SpecificInfoWrapper>
-          <SpecificInfoWrapper>
-            <SpecificInfoTitle> 전세계 사망자 </SpecificInfoTitle>
-            <SpecificInfoIncreaseNum>
+            </S.SpecificInfoTotalNum>
+          </S.SpecificInfoWrapper>
+          <S.SpecificInfoWrapper>
+            <S.SpecificInfoTitle> 전세계 사망자 </S.SpecificInfoTitle>
+            <S.SpecificInfoIncreaseNum>
               {globalInfo.NewDeaths}
-            </SpecificInfoIncreaseNum>
-            <SpecificInfoTotalNum>
+            </S.SpecificInfoIncreaseNum>
+            <S.SpecificInfoTotalNum>
               {globalInfo.TotalDeaths}
-            </SpecificInfoTotalNum>
-          </SpecificInfoWrapper>
+            </S.SpecificInfoTotalNum>
+          </S.SpecificInfoWrapper>
           {selectedInfo ? (
             <>
-              <SpecificInfoWrapper>
-                <SpecificInfoTitle> 확진환자 </SpecificInfoTitle>
-                <SpecificInfoIncreaseNum>
+              <S.SpecificInfoWrapper>
+                <S.SpecificInfoTitle>
+                  <S.FlagImg
+                    src={`https://flagcdn.com/16x12/${selectedInfo.CountryCode.toLowerCase()}.png`}
+                    width="16"
+                    height="12"
+                    alt={selectedInfo.CountryCode}
+                  />{" "}
+                  확진환자
+                </S.SpecificInfoTitle>
+                <S.SpecificInfoIncreaseNum>
                   {selectedInfo.NewConfirmed}
-                </SpecificInfoIncreaseNum>
-                <SpecificInfoTotalNum>
+                </S.SpecificInfoIncreaseNum>
+                <S.SpecificInfoTotalNum>
                   {selectedInfo.TotalConfirmed}
-                </SpecificInfoTotalNum>
-              </SpecificInfoWrapper>
-              <SpecificInfoWrapper>
-                <SpecificInfoTitle> 사망자 </SpecificInfoTitle>
-                <SpecificInfoIncreaseNum>
+                </S.SpecificInfoTotalNum>
+              </S.SpecificInfoWrapper>
+              <S.SpecificInfoWrapper>
+                <S.SpecificInfoTitle>
+                  <S.FlagImg
+                    src={`https://flagcdn.com/16x12/${selectedInfo.CountryCode.toLowerCase()}.png`}
+                    width="16"
+                    height="12"
+                    alt={selectedInfo.CountryCode}
+                  />{" "}
+                  사망자
+                </S.SpecificInfoTitle>
+                <S.SpecificInfoIncreaseNum>
                   {selectedInfo.NewDeaths}
-                </SpecificInfoIncreaseNum>
-                <SpecificInfoTotalNum>
+                </S.SpecificInfoIncreaseNum>
+                <S.SpecificInfoTotalNum>
                   {selectedInfo.TotalDeaths}
-                </SpecificInfoTotalNum>
-              </SpecificInfoWrapper>
+                </S.SpecificInfoTotalNum>
+              </S.SpecificInfoWrapper>
             </>
           ) : (
-            <InfoText> 상단에서 나라를 선택하여 주세요.</InfoText>
+            <S.InfoText> 상단에서 나라를 선택하여 주세요.</S.InfoText>
           )}
-        </MainInfoWrapper>
-      </TitlePanel>
+        </S.MainInfoWrapper>
+        <S.CaptionText>데이터 불러온 날짜: {globalInfo.Date}</S.CaptionText>
+      </S.TitlePanel>
+      <S.RankingSection></S.RankingSection>
+      <S.ChartSection>
+        <S.GlobalChartWrapper></S.GlobalChartWrapper>
+      </S.ChartSection>
     </div>
   );
 };

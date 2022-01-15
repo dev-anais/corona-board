@@ -27,4 +27,6 @@ export interface SpecificInfo {
   TotalConfirmed: number;
   TotalDeaths: number;
   TotalRecovered: number;
+  Date: string;
+  CountryCode: string;
 }
