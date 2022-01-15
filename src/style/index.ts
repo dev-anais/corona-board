@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const PageWrapper = styled.article`
+  background: #000000;
+  opacity: 0.9;
+  color: white;
+`;
+
 export const SelectWrapper = styled.div`
   min-height: 4vh;
 `;
@@ -9,15 +15,14 @@ export const CountriesSelect = styled.select`
   float: right;
   white-space: nowrap;
   text-overflow: ellipsis;
-  background: #000000;
-  opacity: 0.9;
   color: green;
   padding: 8px;
   font-weight: bold;
   border-color: green;
+  border-radius: 4px;
 `;
 
-export const TitlePanel = styled.section`
+export const TitleSection = styled.section`
   width: 80vw;
   margin: 30px auto;
   border-radius: 4px;
@@ -30,7 +35,6 @@ export const TitlePanel = styled.section`
 export const Title = styled.p`
   font-size: 30px;
   font-weight: bold;
-  color: white;
 `;
 
 export const MainInfoWrapper = styled.div`
@@ -56,7 +60,6 @@ export const SpecificInfoIncreaseNum = styled.p`
 
 export const SpecificInfoTotalNum = styled.p`
   font-size: 16px;
-  color: white;
 `;
 export const InfoText = styled.p`
   font-size: 14px;
@@ -65,7 +68,6 @@ export const InfoText = styled.p`
 `;
 export const CaptionText = styled.p`
   text-align: right;
-  color: white;
   margin: 0;
   font-size: 14px;
 `;
@@ -73,3 +75,6 @@ export const RankingSection = styled.section``;
 export const ChartSection = styled.section``;
 export const GlobalChartWrapper = styled.div``;
 export const FlagImg = styled.img``;
+export const ShowMoreButton = styled.button`
+  background-color: yellow;
+`;
