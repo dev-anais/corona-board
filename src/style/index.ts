@@ -24,9 +24,9 @@ export const CountriesSelect = styled.select`
 
 export const TitleSection = styled.section`
   width: 80vw;
-  margin: 30px auto;
-  border-radius: 4px;
-  border: 1px solid black;
+  margin: 0 auto 30px auto;
+  border-radius: 8px;
+  border: 1px solid #eee;
   padding: 1rem;
   background: #000000;
   opacity: 0.9;
@@ -41,8 +41,6 @@ export const MainInfoWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   width: 90%;
   margin: 30px auto;
-  border-radius: 4px;
-  border: 1px solid black;
   display: flex;
   justify-content: space-around;
 `;
@@ -72,9 +70,46 @@ export const CaptionText = styled.p`
   font-size: 14px;
 `;
 export const RankingSection = styled.section``;
-export const ChartSection = styled.section``;
-export const GlobalChartWrapper = styled.div``;
 export const FlagImg = styled.img``;
 export const ShowMoreButton = styled.button`
-  background-color: yellow;
+  background-color: white;
+  margin: 8px 0;
+  height: 40px;
+  width: 80vw;
 `;
+export const RankingTable = styled.table`
+  margin: 0 auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+  height: 100%;
+  width: 80vw;
+`;
+export const RankingTh = styled.th`
+  border: solid #eee;
+  border-width: 0 1px 1px 0;
+  min-width: 40px;
+  position: sticky;
+  top: 0px;
+`;
+export const RankingWideTh = styled.th`
+  width: 16%;
+  border: solid #eee;
+  border-width: 0 1px 1px 0;
+`;
+export const RankingTr = styled.tr`
+  height: 36px;
+`;
+export const RankingHeadTr = styled.tr`
+  height: 36px;
+  position: sticky;
+  top: 0;
+  background-color: gray;
+`;
+
+export const RankingTd = styled.td`
+  border: solid #eee;
+  border-width: 0 1px 1px 0;
+`;
+
+export const ChartSection = styled.section``;
+export const GlobalChartWrapper = styled.div``;

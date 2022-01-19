@@ -62,14 +62,14 @@ const App: FC = () => {
     for (let idx = rankIdx * 50; idx < rankIdx * 50 + 50; idx++) {
       if (!!!countriesInfo[idx]) break;
       copiedRankList.push(
-        <tr key={idx}>
-          <td>{idx + 1}</td>
-          <td>{countriesInfo[idx].Country}</td>
-          <td>{countriesInfo[idx].TotalConfirmed}</td>
-          <td>{countriesInfo[idx].TotalDeaths}</td>
-          <td>{countriesInfo[idx].NewConfirmed}</td>
-          <td>{countriesInfo[idx].NewDeaths}</td>
-        </tr>
+        <S.RankingTr key={idx}>
+          <S.RankingTd>{idx + 1}</S.RankingTd>
+          <S.RankingTd>{countriesInfo[idx].Country}</S.RankingTd>
+          <S.RankingTd>{countriesInfo[idx].TotalConfirmed}</S.RankingTd>
+          <S.RankingTd>{countriesInfo[idx].TotalDeaths}</S.RankingTd>
+          <S.RankingTd>{countriesInfo[idx].NewConfirmed}</S.RankingTd>
+          <S.RankingTd>{countriesInfo[idx].NewDeaths}</S.RankingTd>
+        </S.RankingTr>
       );
     }
     setRankList(copiedRankList);
@@ -153,19 +153,19 @@ const App: FC = () => {
           <S.CaptionText>데이터 불러온 날짜: {globalInfo.Date}</S.CaptionText>
         </S.TitleSection>
         <S.RankingSection>
-          <table>
+          <S.RankingTable>
             <thead>
-              <tr>
-                <th>순위</th>
-                <th>국가명</th>
-                <th>총 확진자</th>
-                <th>총 사망자</th>
-                <th>오늘 확진자</th>
-                <th>오늘 사망자</th>
-              </tr>
+              <S.RankingHeadTr>
+                <S.RankingTh>순위</S.RankingTh>
+                <S.RankingTh>국가명</S.RankingTh>
+                <S.RankingWideTh>총 확진자</S.RankingWideTh>
+                <S.RankingWideTh>총 사망자</S.RankingWideTh>
+                <S.RankingTh>오늘 확진자</S.RankingTh>
+                <S.RankingTh>오늘 사망자</S.RankingTh>
+              </S.RankingHeadTr>
             </thead>
             <tbody>{rankList}</tbody>
-          </table>
+          </S.RankingTable>
           {rankIdx <= 2 && (
             <S.ShowMoreButton onClick={() => setRankIdx(rankIdx + 1)}>
               더보기
