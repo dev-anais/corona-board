@@ -112,4 +112,4 @@ export const RankingTd = styled.td`
 `;
 
 export const ChartSection = styled.section``;
-export const GlobalChartWrapper = styled.div``;
+export const OneCountryChartWrapper = styled.div``;

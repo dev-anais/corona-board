@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { SummaryCovidResponse } from "../types";
+import { SummaryCovidResponse, OneCountryInfoResponse } from "../types";
 
 // for summary info
 export function getSummaryCovidData(): Promise<
@@ -11,11 +11,9 @@ export function getSummaryCovidData(): Promise<
 
 // for specific country info
 
-// function fetchCountryInfo(
-//   countryName: string,
-//   status: CovidStatus
-// ): Promise<AxiosResponse<CountrySummaryResponse>> {
-//   // status params: confirmed, recovered, deaths
-//   const url = `https://api.covid19api.com/country/${countryName}/status/${status}`;
-//   return axios.get(url);
-// }
+export function getCountryInfo(
+  country: string
+): Promise<AxiosResponse<Array<OneCountryInfoResponse>>> {
+  const url = `https://api.covid19api.com/total/country/${country}`;
+  return axios.get(url);
+}

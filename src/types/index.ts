@@ -30,3 +30,10 @@ export interface SpecificInfo {
   Date: string;
   CountryCode: string;
 }
+
+export interface OneCountryInfoResponse {
+  Confirmed: number;
+  Deaths: number;
+  Recovered: number;
+  Date: string;
+}

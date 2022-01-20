@@ -1,9 +1,30 @@
 import React, { useEffect, FC, useState, ReactNode } from "react";
-import { getSummaryCovidData } from "./api";
-import { SpecificInfo, Country } from "./types";
+import { getSummaryCovidData, getCountryInfo } from "./api";
+import { SpecificInfo, Country, OneCountryInfoResponse } from "./types";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+
 import * as S from "./style";
 import "./App.css";
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 const App: FC = () => {
   async function initData() {
     const { data } = await getSummaryCovidData();
@@ -15,6 +36,13 @@ const App: FC = () => {
     setCountriesInfo(
       data.Countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed)
     );
+  }
+
+  async function getCountryData() {
+    if (selectedInfo) {
+      const { data } = await getCountryInfo(selectedInfo.CountryCode);
+      setCountryDailyInfo(data);
+    }
   }
 
   const [countriesInfo, setCountriesInfo] = useState<Array<Country>>();
@@ -36,6 +64,9 @@ const App: FC = () => {
 
   const [rankList, setRankList] = useState<Array<ReactNode>>();
 
+  const [countryDailyInfo, setCountryDailyInfo] =
+    useState<Array<OneCountryInfoResponse>>();
+
   useEffect(() => {
     initData();
   }, []);
@@ -43,6 +74,10 @@ const App: FC = () => {
   useEffect(() => {
     makeRankTableRow(rankIdx);
   }, [countriesInfo, rankIdx]);
+
+  useEffect(() => {
+    getCountryData();
+  }, [selectedInfo]);
 
   const changeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
@@ -74,6 +109,25 @@ const App: FC = () => {
     }
     setRankList(copiedRankList);
   };
+  // const labels = ["January", "February", "March", "April", "May", "June"];
+
+  // const data = {
+  //   // labels: labels,
+  //   datasets: [
+  //     {
+  //       label: "confirmed",
+  //       backgroundColor: "rgb(255, 99, 132)",
+  //       borderColor: "rgb(255, 99, 132)",
+  //       data: countryDailyInfo,
+  //     },
+  //   ],
+  // };
+
+  // const config = {
+  //   type: "line",
+  //   data: data,
+  //   options: {},
+  // };
 
   return (
     <div className="App">
@@ -173,7 +227,11 @@ const App: FC = () => {
           )}
         </S.RankingSection>
         <S.ChartSection>
-          <S.GlobalChartWrapper></S.GlobalChartWrapper>
+          {!!!countryDailyInfo && (
+            <S.OneCountryChartWrapper>
+              {/* <Line data={config.data} /> */}
+            </S.OneCountryChartWrapper>
+          )}
         </S.ChartSection>
       </S.PageWrapper>
     </div>
