@@ -1,12 +1,26 @@
 import React, { useEffect, FC, useState } from "react";
 import { getSummaryCovidData, getCountryInfo } from "./api";
 import { SpecificInfo, Country, OneCountryInfoResponse } from "./types";
-
 import { Title, WorldChart, CountryChart } from "./components";
 import * as S from "./style";
 import "./App.css";
 
 const App: FC = () => {
+  const [countriesInfo, setCountriesInfo] = useState<Array<Country>>();
+  const [globalInfo, setGlobalInfo] = useState<SpecificInfo>({
+    NewConfirmed: 0,
+    NewDeaths: 0,
+    NewRecovered: 0,
+    TotalConfirmed: 0,
+    TotalDeaths: 0,
+    TotalRecovered: 0,
+    Date: "",
+    CountryCode: "",
+  });
+  const [selectedInfo, setSelectedInfo] = useState<SpecificInfo>();
+  const [countryDailyInfo, setCountryDailyInfo] =
+    useState<Array<OneCountryInfoResponse>>();
+
   async function initData() {
     const { data } = await getSummaryCovidData();
     /** TODO:
@@ -19,34 +33,16 @@ const App: FC = () => {
     );
   }
 
+  useEffect(() => {
+    initData();
+  }, []);
+
   async function getCountryData() {
     if (selectedInfo) {
       const { data } = await getCountryInfo(selectedInfo.CountryCode);
       setCountryDailyInfo(data);
     }
   }
-
-  const [countriesInfo, setCountriesInfo] = useState<Array<Country>>();
-
-  const [globalInfo, setGlobalInfo] = useState<SpecificInfo>({
-    NewConfirmed: 0,
-    NewDeaths: 0,
-    NewRecovered: 0,
-    TotalConfirmed: 0,
-    TotalDeaths: 0,
-    TotalRecovered: 0,
-    Date: "",
-    CountryCode: "",
-  });
-
-  const [selectedInfo, setSelectedInfo] = useState<SpecificInfo>();
-
-  const [countryDailyInfo, setCountryDailyInfo] =
-    useState<Array<OneCountryInfoResponse>>();
-
-  useEffect(() => {
-    initData();
-  }, []);
 
   useEffect(() => {
     getCountryData();
