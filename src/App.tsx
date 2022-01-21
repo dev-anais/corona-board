@@ -8,15 +8,15 @@ import {
 } from "./types";
 import {
   Chart as ChartJS,
-  CategoryScale,
   LinearScale,
+  CategoryScale,
+  BarElement,
   PointElement,
   LineElement,
-  Title,
-  Tooltip,
   Legend,
+  Tooltip,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Chart } from "react-chartjs-2";
 
 import * as S from "./style";
 import "./App.css";
@@ -26,7 +26,7 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
-  Title,
+  BarElement,
   Tooltip,
   Legend
 );
@@ -92,7 +92,6 @@ const App: FC = () => {
         ),
         Confirmed: oneMonthData?.map((item) => item.Confirmed),
         Deaths: oneMonthData?.map((item) => item.Deaths),
-        Recovered: oneMonthData?.map((item) => item.Recovered),
       });
   }, [countryDailyInfo]);
 
@@ -134,36 +133,29 @@ const App: FC = () => {
     }
     setRankList(copiedRankList);
   };
-  // const labels = ["January", "February", "March", "April", "May", "June"];
 
   const data = {
     labels: monthChartInfo?.label,
     datasets: [
       {
+        type: "line" as const,
         label: "Confirmed",
         backgroundColor: "red",
         borderColor: "red",
         data: monthChartInfo?.Confirmed,
       },
       {
+        type: "line" as const,
         label: "Deaths",
         backgroundColor: "gray",
         borderColor: "gray",
         data: monthChartInfo?.Deaths,
       },
-      {
-        label: "Recovered",
-        backgroundColor: "green",
-        borderColor: "green",
-        data: monthChartInfo?.Recovered,
-      },
     ],
   };
 
   const config = {
-    type: "line",
     data: data,
-    options: {},
   };
 
   return (
@@ -266,7 +258,7 @@ const App: FC = () => {
         <S.ChartSection>
           {monthChartInfo && (
             <S.OneCountryChartWrapper>
-              <Line data={config.data} />
+              <Chart type="bar" data={config.data} />
             </S.OneCountryChartWrapper>
           )}
         </S.ChartSection>
