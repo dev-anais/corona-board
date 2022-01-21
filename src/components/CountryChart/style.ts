@@ -13,5 +13,5 @@ export const OneCountryChartWrapper = styled.div`
 export const InfoText = styled.p`
   height: 80px;
   width: 80vw;
-  margin: 40px auto;
+  margin: 40px auto 0;
 `;
