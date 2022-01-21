@@ -1,35 +1,11 @@
 import React, { useEffect, FC, useState } from "react";
 import { getSummaryCovidData, getCountryInfo } from "./api";
-import {
-  SpecificInfo,
-  Country,
-  OneCountryInfoResponse,
-  OneMonthChartInfo,
-} from "./types";
-import {
-  Chart as ChartJS,
-  LinearScale,
-  CategoryScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Legend,
-  Tooltip,
-} from "chart.js";
-import { Chart } from "react-chartjs-2";
-import { Title, WorldChart } from "./components";
+import { SpecificInfo, Country, OneCountryInfoResponse } from "./types";
+
+import { Title, WorldChart, CountryChart } from "./components";
 import * as S from "./style";
 import "./App.css";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Tooltip,
-  Legend
-);
 const App: FC = () => {
   async function initData() {
     const { data } = await getSummaryCovidData();
@@ -68,28 +44,9 @@ const App: FC = () => {
   const [countryDailyInfo, setCountryDailyInfo] =
     useState<Array<OneCountryInfoResponse>>();
 
-  const [monthChartInfo, setMonthChartInfo] = useState<OneMonthChartInfo>();
-
   useEffect(() => {
     initData();
   }, []);
-
-  useEffect(() => {
-    const monthDate = new Date();
-    monthDate.setMonth(monthDate.getMonth() - 1);
-    const oneMonthData = countryDailyInfo?.filter(
-      (item) => new Date(item.Date) > monthDate
-    );
-
-    oneMonthData &&
-      setMonthChartInfo({
-        label: oneMonthData?.map((item) =>
-          item.Date.substring(0, item.Date.indexOf("T"))
-        ),
-        Confirmed: oneMonthData?.map((item) => item.Confirmed),
-        Deaths: oneMonthData?.map((item) => item.Deaths),
-      });
-  }, [countryDailyInfo]);
 
   useEffect(() => {
     getCountryData();
@@ -106,30 +63,6 @@ const App: FC = () => {
     }
   };
 
-  const data = {
-    labels: monthChartInfo?.label,
-    datasets: [
-      {
-        type: "line" as const,
-        label: "Confirmed",
-        backgroundColor: "red",
-        borderColor: "red",
-        data: monthChartInfo?.Confirmed,
-      },
-      {
-        type: "line" as const,
-        label: "Deaths",
-        backgroundColor: "gray",
-        borderColor: "gray",
-        data: monthChartInfo?.Deaths,
-      },
-    ],
-  };
-
-  const config = {
-    data: data,
-  };
-
   return (
     <div className="App">
       <S.PageWrapper>
@@ -140,13 +73,7 @@ const App: FC = () => {
           globalInfo={globalInfo}
         />
         <WorldChart countriesInfo={countriesInfo}></WorldChart>
-        <S.ChartSection>
-          {monthChartInfo && (
-            <S.OneCountryChartWrapper>
-              <Chart type="bar" data={config.data} />
-            </S.OneCountryChartWrapper>
-          )}
-        </S.ChartSection>
+        <CountryChart countryDailyInfo={countryDailyInfo} />
       </S.PageWrapper>
     </div>
   );
