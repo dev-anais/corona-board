@@ -38,6 +38,7 @@ export default function WorldChart({
 
   return (
     <S.RankingSection>
+      <S.RankingTitle> 국가별 코로나 현황표 </S.RankingTitle>
       <S.RankingTable>
         <thead>
           <S.RankingHeadTr>

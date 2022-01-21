@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const RankingSection = styled.section``;
+export const RankingTitle = styled.p`
+  font-size: 26px;
+  font-weight: bold;
+`;
 export const ShowMoreButton = styled.button`
   background-color: white;
   margin: 8px 0;

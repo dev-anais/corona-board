@@ -71,10 +71,17 @@ export default function CountryChart({
 
   return (
     <S.ChartSection>
-      {monthChartInfo && (
-        <S.OneCountryChartWrapper>
-          <Chart type="bar" data={chartData} />
-        </S.OneCountryChartWrapper>
+      {monthChartInfo ? (
+        <>
+          <S.ChartTitle>선택 국가 차트</S.ChartTitle>
+          <S.OneCountryChartWrapper>
+            <Chart type="bar" data={chartData} />
+          </S.OneCountryChartWrapper>
+        </>
+      ) : (
+        <S.InfoText>
+          상단에서 나라를 선택하면 해당 국가의 차트를 볼 수 있습니다.
+        </S.InfoText>
       )}
     </S.ChartSection>
   );
