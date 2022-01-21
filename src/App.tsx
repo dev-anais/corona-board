@@ -1,6 +1,11 @@
 import React, { useEffect, FC, useState, ReactNode } from "react";
 import { getSummaryCovidData, getCountryInfo } from "./api";
-import { SpecificInfo, Country, OneCountryInfoResponse } from "./types";
+import {
+  SpecificInfo,
+  Country,
+  OneCountryInfoResponse,
+  OneMonthChartInfo,
+} from "./types";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -67,9 +72,29 @@ const App: FC = () => {
   const [countryDailyInfo, setCountryDailyInfo] =
     useState<Array<OneCountryInfoResponse>>();
 
+  const [monthChartInfo, setMonthChartInfo] = useState<OneMonthChartInfo>();
+
   useEffect(() => {
     initData();
   }, []);
+
+  useEffect(() => {
+    const monthDate = new Date();
+    monthDate.setMonth(monthDate.getMonth() - 1);
+    const oneMonthData = countryDailyInfo?.filter(
+      (item) => new Date(item.Date) > monthDate
+    );
+
+    oneMonthData &&
+      setMonthChartInfo({
+        label: oneMonthData?.map((item) =>
+          item.Date.substring(0, item.Date.indexOf("T"))
+        ),
+        Confirmed: oneMonthData?.map((item) => item.Confirmed),
+        Deaths: oneMonthData?.map((item) => item.Deaths),
+        Recovered: oneMonthData?.map((item) => item.Recovered),
+      });
+  }, [countryDailyInfo]);
 
   useEffect(() => {
     makeRankTableRow(rankIdx);
@@ -111,23 +136,35 @@ const App: FC = () => {
   };
   // const labels = ["January", "February", "March", "April", "May", "June"];
 
-  // const data = {
-  //   // labels: labels,
-  //   datasets: [
-  //     {
-  //       label: "confirmed",
-  //       backgroundColor: "rgb(255, 99, 132)",
-  //       borderColor: "rgb(255, 99, 132)",
-  //       data: countryDailyInfo,
-  //     },
-  //   ],
-  // };
+  const data = {
+    labels: monthChartInfo?.label,
+    datasets: [
+      {
+        label: "Confirmed",
+        backgroundColor: "red",
+        borderColor: "red",
+        data: monthChartInfo?.Confirmed,
+      },
+      {
+        label: "Deaths",
+        backgroundColor: "gray",
+        borderColor: "gray",
+        data: monthChartInfo?.Deaths,
+      },
+      {
+        label: "Recovered",
+        backgroundColor: "green",
+        borderColor: "green",
+        data: monthChartInfo?.Recovered,
+      },
+    ],
+  };
 
-  // const config = {
-  //   type: "line",
-  //   data: data,
-  //   options: {},
-  // };
+  const config = {
+    type: "line",
+    data: data,
+    options: {},
+  };
 
   return (
     <div className="App">
@@ -227,9 +264,9 @@ const App: FC = () => {
           )}
         </S.RankingSection>
         <S.ChartSection>
-          {!!!countryDailyInfo && (
+          {monthChartInfo && (
             <S.OneCountryChartWrapper>
-              {/* <Line data={config.data} /> */}
+              <Line data={config.data} />
             </S.OneCountryChartWrapper>
           )}
         </S.ChartSection>

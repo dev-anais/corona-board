@@ -37,3 +37,10 @@ export interface OneCountryInfoResponse {
   Recovered: number;
   Date: string;
 }
+
+export interface OneMonthChartInfo {
+  label: Array<string>;
+  Confirmed: Array<number>;
+  Deaths: Array<number>;
+  Recovered: Array<number>;
+}
