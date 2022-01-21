@@ -1,4 +1,4 @@
-import React, { useEffect, FC, useState, ReactNode } from "react";
+import React, { useEffect, FC, useState } from "react";
 import { getSummaryCovidData, getCountryInfo } from "./api";
 import {
   SpecificInfo,
@@ -17,7 +17,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
-import { Title } from "./components";
+import { Title, WorldChart } from "./components";
 import * as S from "./style";
 import "./App.css";
 
@@ -65,10 +65,6 @@ const App: FC = () => {
 
   const [selectedInfo, setSelectedInfo] = useState<SpecificInfo>();
 
-  const [rankIdx, setRankIdx] = useState<number>(0);
-
-  const [rankList, setRankList] = useState<Array<ReactNode>>();
-
   const [countryDailyInfo, setCountryDailyInfo] =
     useState<Array<OneCountryInfoResponse>>();
 
@@ -96,10 +92,6 @@ const App: FC = () => {
   }, [countryDailyInfo]);
 
   useEffect(() => {
-    makeRankTableRow(rankIdx);
-  }, [countriesInfo, rankIdx]);
-
-  useEffect(() => {
     getCountryData();
   }, [selectedInfo]);
 
@@ -112,26 +104,6 @@ const App: FC = () => {
     if (selectedCountry) {
       setSelectedInfo(selectedCountry);
     }
-  };
-
-  const makeRankTableRow = (rankIdx: number) => {
-    if (!!!countriesInfo) return;
-
-    const copiedRankList = Array.from(rankList || []);
-    for (let idx = rankIdx * 50; idx < rankIdx * 50 + 50; idx++) {
-      if (!!!countriesInfo[idx]) break;
-      copiedRankList.push(
-        <S.RankingTr key={idx}>
-          <S.RankingTd>{idx + 1}</S.RankingTd>
-          <S.RankingTd>{countriesInfo[idx].Country}</S.RankingTd>
-          <S.RankingTd>{countriesInfo[idx].TotalConfirmed}</S.RankingTd>
-          <S.RankingTd>{countriesInfo[idx].TotalDeaths}</S.RankingTd>
-          <S.RankingTd>{countriesInfo[idx].NewConfirmed}</S.RankingTd>
-          <S.RankingTd>{countriesInfo[idx].NewDeaths}</S.RankingTd>
-        </S.RankingTr>
-      );
-    }
-    setRankList(copiedRankList);
   };
 
   const data = {
@@ -160,33 +132,14 @@ const App: FC = () => {
 
   return (
     <div className="App">
-      <Title
-        changeCountry={changeCountry}
-        countriesInfo={countriesInfo}
-        selectedInfo={selectedInfo}
-        globalInfo={globalInfo}
-      />
       <S.PageWrapper>
-        <S.RankingSection>
-          <S.RankingTable>
-            <thead>
-              <S.RankingHeadTr>
-                <S.RankingTh>순위</S.RankingTh>
-                <S.RankingTh>국가명</S.RankingTh>
-                <S.RankingWideTh>총 확진자</S.RankingWideTh>
-                <S.RankingWideTh>총 사망자</S.RankingWideTh>
-                <S.RankingTh>오늘 확진자</S.RankingTh>
-                <S.RankingTh>오늘 사망자</S.RankingTh>
-              </S.RankingHeadTr>
-            </thead>
-            <tbody>{rankList}</tbody>
-          </S.RankingTable>
-          {rankIdx <= 2 && (
-            <S.ShowMoreButton onClick={() => setRankIdx(rankIdx + 1)}>
-              더보기
-            </S.ShowMoreButton>
-          )}
-        </S.RankingSection>
+        <Title
+          changeCountry={changeCountry}
+          countriesInfo={countriesInfo}
+          selectedInfo={selectedInfo}
+          globalInfo={globalInfo}
+        />
+        <WorldChart countriesInfo={countriesInfo}></WorldChart>
         <S.ChartSection>
           {monthChartInfo && (
             <S.OneCountryChartWrapper>

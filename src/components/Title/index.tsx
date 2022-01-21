@@ -9,7 +9,7 @@ interface Props {
   globalInfo: SpecificInfo | undefined;
 }
 
-export default function TitleSection({
+export default function Title({
   changeCountry,
   countriesInfo,
   selectedInfo,
