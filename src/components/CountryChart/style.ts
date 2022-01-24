@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { theme, palette } from "styled-tools";
 
 export const ChartSection = styled.section`
   padding: 32px 0 32px;
 `;
 export const ChartTitle = styled.p`
-  font-size: 26px;
+  ${theme("fontStyle.title")};
   font-weight: bold;
 `;
 export const OneCountryChartWrapper = styled.div`
@@ -20,5 +21,5 @@ export const InfoText = styled.p`
 export const CaptionText = styled.p`
   text-align: right;
   margin: 0;
-  font-size: 14px;
+  ${theme("fontStyle.caption")};
 `;

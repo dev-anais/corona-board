@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme, palette } from "styled-tools";
 
 export const TitleSection = styled.section`
   width: 80vw;
@@ -11,6 +12,7 @@ export const TitleSection = styled.section`
 
 export const CountriesSelect = styled.select`
   width: 20vw;
+  min-width: 136px;
   float: right;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -26,45 +28,56 @@ export const SelectWrapper = styled.div`
 `;
 
 export const Title = styled.p`
-  font-size: 2rem;
-  font-weight: bold;
+  ${theme("fontStyle.title_bold")}
 `;
 
 export const MainInfoWrapper = styled.div`
-  background-color: rgba(0, 0, 0, 0.9);
   margin: 30px auto;
+  @media ${(props) => props.theme.laptop} {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  @media ${(props) => props.theme.mobile} {
+    display: block;
+  }
 `;
 
 export const RowWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
+  @media ${(props) => props.theme.laptop} {
+    display: contents;
+  }
+
+  @media ${(props) => props.theme.mobile} {
+    display: flex;
+    justify-content: space-around;
+  }
 `;
 
 export const SpecificInfoWrapper = styled.div``;
 
 export const SpecificInfoTitle = styled.p`
-  font-size: 1rem;
-  font-weight: bold;
+  ${theme("fontStyle.body1_bold")}
   word-break: keep-all;
   color: gray;
 `;
 export const SpecificInfoIncreaseNum = styled.p`
-  font-size: 24px;
+  ${theme("fontStyle.subtitle_bold")}
   color: red;
 `;
 
 export const SpecificInfoTotalNum = styled.p`
-  font-size: 16px;
+  ${theme("fontStyle.body1")}
 `;
 export const InfoText = styled.p`
-  font-size: 14px;
+  ${theme("fontStyle.caption")}
   color: red;
   align-self: center;
 `;
 export const CaptionText = styled.p`
   text-align: right;
   margin: 0;
-  font-size: 14px;
+  ${theme("fontStyle.caption")}
 `;
 
 export const FlagImg = styled.img``;

@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { theme, palette } from "styled-tools";
 
 export const RankingSection = styled.section``;
 export const RankingTitle = styled.p`
-  font-size: 26px;
+  ${theme("fontStyle.title")};
   font-weight: bold;
 `;
 export const ShowMoreButton = styled.button`
