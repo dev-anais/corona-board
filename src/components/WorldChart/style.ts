@@ -18,18 +18,24 @@ export const RankingTable = styled.table`
   border-collapse: collapse;
   height: 100%;
   width: 80vw;
+  word-break: keep-all;
 `;
 export const RankingTh = styled.th`
   border: solid #eee;
   border-width: 0 1px 1px 0;
-  min-width: 40px;
   position: sticky;
   top: 0px;
+  @media ${(props) => props.theme.labtop} {
+    min-width: 40px;
+  }
+  @media ${(props) => props.theme.mobile} {
+    min-width: 0px;
+  }
 `;
 export const RankingWideTh = styled.th`
-  width: 16%;
   border: solid #eee;
   border-width: 0 1px 1px 0;
+  width: 10vw;
 `;
 export const RankingTr = styled.tr`
   height: 36px;

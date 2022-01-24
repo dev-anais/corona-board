@@ -1,7 +1,7 @@
 import * as S from "./style";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Country } from "../../types";
-
+import { thousandSeperator } from "../../helper";
 interface Props {
   countriesInfo: Array<Country> | undefined;
 }
@@ -26,10 +26,18 @@ export default function WorldChart({
         <S.RankingTr key={idx}>
           <S.RankingTd>{idx + 1}</S.RankingTd>
           <S.RankingTd>{countriesInfo[idx].Country}</S.RankingTd>
-          <S.RankingTd>{countriesInfo[idx].TotalConfirmed}</S.RankingTd>
-          <S.RankingTd>{countriesInfo[idx].TotalDeaths}</S.RankingTd>
-          <S.RankingTd>{countriesInfo[idx].NewConfirmed}</S.RankingTd>
-          <S.RankingTd>{countriesInfo[idx].NewDeaths}</S.RankingTd>
+          <S.RankingTd>
+            {thousandSeperator(countriesInfo[idx].TotalConfirmed)}
+          </S.RankingTd>
+          <S.RankingTd>
+            {thousandSeperator(countriesInfo[idx].TotalDeaths)}
+          </S.RankingTd>
+          <S.RankingTd>
+            {thousandSeperator(countriesInfo[idx].NewConfirmed)}
+          </S.RankingTd>
+          <S.RankingTd>
+            {thousandSeperator(countriesInfo[idx].NewDeaths)}
+          </S.RankingTd>
         </S.RankingTr>
       );
     }
