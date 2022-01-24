@@ -43,3 +43,8 @@ export interface OneMonthChartInfo {
   Confirmed: Array<number>;
   Deaths: Array<number>;
 }
+
+export interface ShowingDate {
+  startDate: string;
+  endDate: string;
+}

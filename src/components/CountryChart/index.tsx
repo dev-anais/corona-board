@@ -1,6 +1,10 @@
 import * as S from "./style";
 import React, { useEffect, useState } from "react";
-import { OneMonthChartInfo, OneCountryInfoResponse } from "../../types";
+import {
+  OneMonthChartInfo,
+  OneCountryInfoResponse,
+  ShowingDate,
+} from "../../types";
 
 import {
   Chart as ChartJS,
@@ -37,17 +41,27 @@ export default function CountryChart({
       (item) => new Date(item.Date) > monthDate
     );
 
-    oneMonthData &&
+    if (oneMonthData) {
       setMonthChartInfo({
         label: oneMonthData?.map((item) =>
-          item.Date.substring(0, item.Date.indexOf("T"))
+          item.Date.substring(5, item.Date.indexOf("T"))
         ),
         Confirmed: oneMonthData?.map((item) => item.Confirmed),
         Deaths: oneMonthData?.map((item) => item.Deaths),
       });
+      const startDate = oneMonthData[0].Date;
+      const endDate = oneMonthData[oneMonthData.length - 1].Date;
+
+      setShowingDate({
+        startDate: startDate.substring(0, startDate.indexOf("T")),
+        endDate: endDate.substring(0, endDate.indexOf("T")),
+      });
+    }
   }, [countryDailyInfo]);
 
   const [monthChartInfo, setMonthChartInfo] = useState<OneMonthChartInfo>();
+
+  const [showingDate, setShowingDate] = useState<ShowingDate>();
 
   const chartData = {
     labels: monthChartInfo?.label,
@@ -75,6 +89,11 @@ export default function CountryChart({
         <>
           <S.ChartTitle>선택 국가 차트</S.ChartTitle>
           <S.OneCountryChartWrapper>
+            {showingDate && (
+              <S.CaptionText>
+                {showingDate.startDate} ~ {showingDate.endDate}
+              </S.CaptionText>
+            )}
             <Chart type="bar" data={chartData} />
           </S.OneCountryChartWrapper>
         </>

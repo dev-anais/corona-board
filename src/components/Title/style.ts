@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 export const TitleSection = styled.section`
   width: 80vw;
-  margin: 0 auto 30px auto;
+  margin: 30px auto 30px auto;
   border-radius: 8px;
   border: 1px solid #eee;
-  padding: 1rem;
-  background: #000000;
+  padding: 32px;
   opacity: 0.9;
 `;
 
