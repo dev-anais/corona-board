@@ -26,14 +26,16 @@ export const SelectWrapper = styled.div`
 `;
 
 export const Title = styled.p`
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: bold;
 `;
 
 export const MainInfoWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
-  width: 90%;
   margin: 30px auto;
+`;
+
+export const RowWrapper = styled.div`
   display: flex;
   justify-content: space-around;
 `;
@@ -41,7 +43,9 @@ export const MainInfoWrapper = styled.div`
 export const SpecificInfoWrapper = styled.div``;
 
 export const SpecificInfoTitle = styled.p`
-  font-size: 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  word-break: keep-all;
   color: gray;
 `;
 export const SpecificInfoIncreaseNum = styled.p`
