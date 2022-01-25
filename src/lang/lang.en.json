@@ -14,5 +14,6 @@
   "todayDeaths": "Today Deaths",
   "showMore": "Show more",
   "selectedCountryChart": "COVID-19 Chart",
-  "pleaseSelectContry": "Select a country at the top to see a chart for a specific country."
+  "pleaseSelectContry": "Select a country at the top to see a chart for a specific country.",
+  "references": "References"
 }

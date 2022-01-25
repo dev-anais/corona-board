@@ -14,5 +14,6 @@
   "todayDeaths": "오늘 사망자",
   "showMore": "더보기",
   "selectedCountryChart": "선택 국가 차트",
-  "pleaseSelectContry": "상단에서 나라를 선택하면 해당 국가의 차트를 볼 수 있습니다."
+  "pleaseSelectContry": "상단에서 나라를 선택하면 해당 국가의 차트를 볼 수 있습니다.",
+  "references": "데이터 출처"
 }

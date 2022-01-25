@@ -1,12 +1,11 @@
 import React, { useEffect, FC, useState } from "react";
 import { getSummaryCovidData, getCountryInfo } from "./api";
 import { SpecificInfo, Country, OneCountryInfoResponse } from "./types";
-import { Title, WorldChart, CountryChart } from "./components";
+import { Title, WorldChart, CountryChart, Reference } from "./components";
 import { ThemeProvider } from "styled-components";
 import defaultTheme from "./style/theme";
 import GlobalStyles from "./style/globalstyle";
 import * as S from "./style/app";
-import "./App.css";
 import "./lang/i18n";
 
 const App: FC = () => {
@@ -75,6 +74,7 @@ const App: FC = () => {
         />
         <WorldChart countriesInfo={countriesInfo}></WorldChart>
         <CountryChart countryDailyInfo={countryDailyInfo} />
+        <Reference />
       </S.PageWrapper>
     </ThemeProvider>
   );
