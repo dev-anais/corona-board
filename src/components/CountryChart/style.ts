@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme, palette } from "styled-tools";
+import { theme } from "styled-tools";
 
 export const ChartSection = styled.section`
   padding: 32px 0 32px;

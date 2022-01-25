@@ -21,6 +21,7 @@ const theme: thmeProps = {
     subtitle: `font-size: 1.4rem;`,
     body1: `font-size: 1.2rem;`,
     body2: `font-size : 0.9rem`,
+    body3: `font-size : 0.8rem`,
     caption: `font-size: 1rem;`,
   },
   commonPadding: `padding: 16px 20px;`,

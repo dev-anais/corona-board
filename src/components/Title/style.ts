@@ -15,8 +15,22 @@ export const TitleSection = styled.section`
     width: 90vw;
   }
 `;
+export const UpperWrppaer = styled.article`
+  display: flex;
+  justify-content: space-between;
+`;
+export const Empty = styled.div`
+  width: 28%;
+`;
+export const SelectWrapper = styled.div`
+  min-height: 4vh;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  align-self: center;
+`;
 
-export const CountriesSelect = styled.select`
+export const UserSelect = styled.select`
   width: 20vw;
   min-width: 136px;
   float: right;
@@ -24,14 +38,12 @@ export const CountriesSelect = styled.select`
   text-overflow: ellipsis;
   color: ${palette("green")};
   border-color: ${palette("green")};
-  padding: 8px;
-  ${theme("fontStyle.caption_bold")};
+  padding: 4px;
+  ${theme("fontStyle.body3")};
+  font-weight: bold;
   border-radius: 4px;
-  margin-right: 10px;
-`;
-
-export const SelectWrapper = styled.div`
-  min-height: 4vh;
+  margin: 0 10px 8px;
+  background-color: ${palette("dark_primary")};
 `;
 
 export const Title = styled.p`

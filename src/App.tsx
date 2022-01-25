@@ -5,9 +5,9 @@ import { Title, WorldChart, CountryChart } from "./components";
 import { ThemeProvider } from "styled-components";
 import defaultTheme from "./style/theme";
 import GlobalStyles from "./style/globalstyle";
-
 import * as S from "./style/app";
 import "./App.css";
+import "./lang/i18n";
 
 const App: FC = () => {
   const [countriesInfo, setCountriesInfo] = useState<Array<Country>>();

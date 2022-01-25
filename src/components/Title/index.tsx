@@ -1,6 +1,7 @@
 import * as S from "./style";
 import React from "react";
 import { SpecificInfo, Country } from "../../types";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   changeCountry: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -15,19 +16,38 @@ export default function Title({
   selectedInfo,
   globalInfo,
 }: Props): React.ReactElement {
+  const { i18n } = useTranslation();
+  const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    i18n.changeLanguage(e.target.value);
+  };
+
   return (
     <S.TitleSection>
-      <S.SelectWrapper>
-        <S.CountriesSelect onChange={changeCountry}>
-          <option></option>
-          {countriesInfo?.map((countryInfo, idx) => (
-            <option key={idx} value={countryInfo.CountryCode}>
-              {countryInfo.Country}
+      <S.UpperWrppaer>
+        <S.Empty />
+        <S.Title> 코로나바이러스감염증-19</S.Title>
+        <S.SelectWrapper>
+          <S.UserSelect onChange={changeLanguage}>
+            <option key={"lang0"} value="en">
+              Language
             </option>
-          ))}
-        </S.CountriesSelect>
-      </S.SelectWrapper>
-      <S.Title> 코로나바이러스감염증-19</S.Title>
+            <option key={"lang1"} value="en">
+              English
+            </option>
+            <option key={"lang2"} value="ko">
+              한국어
+            </option>
+          </S.UserSelect>
+          <S.UserSelect onChange={changeCountry}>
+            <option>Country</option>
+            {countriesInfo?.map((countryInfo, idx) => (
+              <option key={idx} value={countryInfo.CountryCode}>
+                {countryInfo.Country}
+              </option>
+            ))}
+          </S.UserSelect>
+        </S.SelectWrapper>
+      </S.UpperWrppaer>
       <S.MainInfoWrapper>
         <S.RowWrapper>
           <S.SpecificInfoWrapper>
