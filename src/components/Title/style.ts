@@ -6,7 +6,9 @@ export const TitleSection = styled.section`
   margin: 30px auto 30px auto;
   border-radius: 8px;
   border: 1px solid #eee;
-  padding: 32px;
+  @media ${(props) => props.theme.laptop} {
+    padding: 32px;
+  }
   opacity: 0.9;
 `;
 
