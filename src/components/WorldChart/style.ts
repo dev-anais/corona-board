@@ -10,6 +10,7 @@ export const ShowMoreButton = styled.button`
   margin: 8px 0;
   height: 40px;
   width: 80vw;
+  ${theme("fontStyle.caption_bold")};
 `;
 export const RankingTable = styled.table`
   margin: 0 auto;
