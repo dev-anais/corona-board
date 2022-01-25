@@ -93,7 +93,10 @@ export default function Title({
           <S.InfoText> 상단에서 나라를 선택하여 주세요.</S.InfoText>
         )}
       </S.MainInfoWrapper>
-      <S.CaptionText>데이터 불러온 날짜: {globalInfo?.Date}</S.CaptionText>
+      <S.CaptionText>
+        데이터 불러온 날짜
+        <br /> {globalInfo?.Date}
+      </S.CaptionText>
     </S.TitleSection>
   );
 }

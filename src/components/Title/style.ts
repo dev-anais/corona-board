@@ -18,7 +18,7 @@ export const CountriesSelect = styled.select`
   text-overflow: ellipsis;
   color: green;
   padding: 8px;
-  font-weight: bold;
+  ${theme("fontStyle.caption_bold")};
   border-color: green;
   border-radius: 4px;
 `;

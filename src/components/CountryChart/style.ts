@@ -5,13 +5,16 @@ export const ChartSection = styled.section`
   padding: 32px 0 32px;
 `;
 export const ChartTitle = styled.p`
-  ${theme("fontStyle.title")};
-  font-weight: bold;
+  ${theme("fontStyle.title_bold")};
 `;
 export const OneCountryChartWrapper = styled.div`
-  height: 400px;
-  width: 80vw;
   margin: 0 auto;
+  @media ${(props) => props.theme.laptop} {
+    width: 80vw;
+  }
+  @media ${(props) => props.theme.mobile} {
+    width: 90vw;
+  }
 `;
 export const InfoText = styled.p`
   height: 80px;

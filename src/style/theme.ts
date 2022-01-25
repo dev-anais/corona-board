@@ -13,6 +13,7 @@ const theme: thmeProps = {
     title: `font-size: 2rem;`,
     subtitle: `font-size: 1.4rem;`,
     body1: `font-size: 1.2rem;`,
+    body2: `font-size : 0.9rem`,
     caption: `font-size: 1rem;`,
   },
   commonPadding: `padding: 16px 20px;`,

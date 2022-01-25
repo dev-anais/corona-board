@@ -3,8 +3,7 @@ import { theme, palette } from "styled-tools";
 
 export const RankingSection = styled.section``;
 export const RankingTitle = styled.p`
-  ${theme("fontStyle.title")};
-  font-weight: bold;
+  ${theme("fontStyle.title_bold")};
 `;
 export const ShowMoreButton = styled.button`
   background-color: white;
@@ -19,13 +18,19 @@ export const RankingTable = styled.table`
   height: 100%;
   width: 80vw;
   word-break: keep-all;
+  @media ${(props) => props.theme.laptop} {
+    ${theme("fontStyle.caption")};
+  }
+  @media ${(props) => props.theme.mobile} {
+    ${theme("fontStyle.body2")};
+  }
 `;
 export const RankingTh = styled.th`
   border: solid #eee;
   border-width: 0 1px 1px 0;
   position: sticky;
   top: 0px;
-  @media ${(props) => props.theme.labtop} {
+  @media ${(props) => props.theme.laptop} {
     min-width: 40px;
   }
   @media ${(props) => props.theme.mobile} {
