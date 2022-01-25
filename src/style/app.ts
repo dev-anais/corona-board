@@ -1,8 +1,7 @@
 import styled from "styled-components";
+import { palette } from "styled-tools";
 
 export const PageWrapper = styled.article`
-  background: #000000;
-  opacity: 0.9;
-  color: white;
+  color: ${palette("white")};
   text-align: center;
 `;

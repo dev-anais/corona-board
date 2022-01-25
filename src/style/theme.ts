@@ -8,7 +8,14 @@ const size = {
 };
 
 const theme: thmeProps = {
-  palette: {},
+  palette: {
+    dark_primary: "#121212",
+    white: "#FFFFFF",
+    green: "#038F11",
+    deep_gray: "#909090",
+    gray: "#BDBDBD",
+    red: "#ED1313",
+  },
   fontStyle: {
     title: `font-size: 2rem;`,
     subtitle: `font-size: 1.4rem;`,

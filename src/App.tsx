@@ -6,7 +6,7 @@ import { ThemeProvider } from "styled-components";
 import defaultTheme from "./style/theme";
 import GlobalStyles from "./style/globalstyle";
 
-import * as S from "./style";
+import * as S from "./style/app";
 import "./App.css";
 
 const App: FC = () => {

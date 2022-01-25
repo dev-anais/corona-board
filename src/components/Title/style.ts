@@ -2,14 +2,18 @@ import styled from "styled-components";
 import { theme, palette } from "styled-tools";
 
 export const TitleSection = styled.section`
-  width: 80vw;
-  margin: 30px auto 30px auto;
   border-radius: 8px;
-  border: 1px solid #eee;
+  border: 1px solid ${palette("gray")};
+  margin: 30px auto;
+
   @media ${(props) => props.theme.laptop} {
     padding: 32px;
+    width: 80vw;
   }
-  opacity: 0.9;
+  @media ${(props) => props.theme.mobile} {
+    padding: 10px 0;
+    width: 90vw;
+  }
 `;
 
 export const CountriesSelect = styled.select`
@@ -18,11 +22,12 @@ export const CountriesSelect = styled.select`
   float: right;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: green;
+  color: ${palette("green")};
+  border-color: ${palette("green")};
   padding: 8px;
   ${theme("fontStyle.caption_bold")};
-  border-color: green;
   border-radius: 4px;
+  margin-right: 10px;
 `;
 
 export const SelectWrapper = styled.div`
@@ -61,11 +66,11 @@ export const SpecificInfoWrapper = styled.div``;
 export const SpecificInfoTitle = styled.p`
   ${theme("fontStyle.body1_bold")}
   word-break: keep-all;
-  color: gray;
+  color: ${palette("deep_gray")};
 `;
 export const SpecificInfoIncreaseNum = styled.p`
   ${theme("fontStyle.subtitle_bold")}
-  color: red;
+  color: ${palette("red")};
 `;
 
 export const SpecificInfoTotalNum = styled.p`
@@ -73,12 +78,12 @@ export const SpecificInfoTotalNum = styled.p`
 `;
 export const InfoText = styled.p`
   ${theme("fontStyle.caption")}
-  color: red;
+  color: ${palette("red")};
   align-self: center;
 `;
 export const CaptionText = styled.p`
   text-align: right;
-  margin: 0;
+  margin: 0 10px 0 0;
   ${theme("fontStyle.caption")}
 `;
 
