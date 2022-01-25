@@ -20,7 +20,7 @@ export const UpperWrppaer = styled.article`
   justify-content: space-between;
 `;
 export const Empty = styled.div`
-  width: 28%;
+  width: 22%;
 `;
 export const SelectWrapper = styled.div`
   min-height: 4vh;

@@ -1,11 +1,11 @@
 import * as S from "./style";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   OneMonthChartInfo,
   OneCountryInfoResponse,
   ShowingDate,
 } from "../../types";
-
 import {
   Chart as ChartJS,
   LinearScale,
@@ -34,6 +34,7 @@ interface Props {
 export default function CountryChart({
   countryDailyInfo,
 }: Props): React.ReactElement {
+  const { t } = useTranslation();
   useEffect(() => {
     const monthDate = new Date();
     monthDate.setMonth(monthDate.getMonth() - 1);
@@ -87,7 +88,7 @@ export default function CountryChart({
     <S.ChartSection>
       {monthChartInfo ? (
         <>
-          <S.ChartTitle>선택 국가 차트</S.ChartTitle>
+          <S.ChartTitle>{t("selectedCountryChart")}</S.ChartTitle>
           <S.OneCountryChartWrapper>
             {showingDate && (
               <S.CaptionText>
@@ -98,8 +99,8 @@ export default function CountryChart({
           </S.OneCountryChartWrapper>
         </>
       ) : (
-        <S.InfoText>
-          상단에서 나라를 선택하면 해당 국가의 차트를 볼 수 있습니다.
+        <S.InfoText onClick={() => window.scrollTo(0, 0)}>
+          {t("pleaseSelectContry")}
         </S.InfoText>
       )}
     </S.ChartSection>

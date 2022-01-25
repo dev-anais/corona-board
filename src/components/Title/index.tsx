@@ -16,7 +16,7 @@ export default function Title({
   selectedInfo,
   globalInfo,
 }: Props): React.ReactElement {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     i18n.changeLanguage(e.target.value);
   };
@@ -25,7 +25,7 @@ export default function Title({
     <S.TitleSection>
       <S.UpperWrppaer>
         <S.Empty />
-        <S.Title> 코로나바이러스감염증-19</S.Title>
+        <S.Title> {t("titleName")}</S.Title>
         <S.SelectWrapper>
           <S.UserSelect onChange={changeLanguage}>
             <option key={"lang0"} value="en">
@@ -51,7 +51,7 @@ export default function Title({
       <S.MainInfoWrapper>
         <S.RowWrapper>
           <S.SpecificInfoWrapper>
-            <S.SpecificInfoTitle> 전세계 확진환자 </S.SpecificInfoTitle>
+            <S.SpecificInfoTitle> {t("worldConfirmed")} </S.SpecificInfoTitle>
             <S.SpecificInfoIncreaseNum>
               {globalInfo?.NewConfirmed}
             </S.SpecificInfoIncreaseNum>
@@ -60,7 +60,7 @@ export default function Title({
             </S.SpecificInfoTotalNum>
           </S.SpecificInfoWrapper>
           <S.SpecificInfoWrapper>
-            <S.SpecificInfoTitle> 전세계 사망자 </S.SpecificInfoTitle>
+            <S.SpecificInfoTitle> {t("worldDeaths")} </S.SpecificInfoTitle>
             <S.SpecificInfoIncreaseNum>
               {globalInfo?.NewDeaths}
             </S.SpecificInfoIncreaseNum>
@@ -81,7 +81,7 @@ export default function Title({
                     height="12"
                     alt={selectedInfo.CountryCode}
                   />{" "}
-                  확진환자
+                  {t("confirmed")}
                 </S.SpecificInfoTitle>
                 <S.SpecificInfoIncreaseNum>
                   {selectedInfo.NewConfirmed}
@@ -98,7 +98,7 @@ export default function Title({
                     height="12"
                     alt={selectedInfo.CountryCode}
                   />{" "}
-                  사망자
+                  {t("deaths")}
                 </S.SpecificInfoTitle>
                 <S.SpecificInfoIncreaseNum>
                   {selectedInfo.NewDeaths}
@@ -110,11 +110,11 @@ export default function Title({
             </S.RowWrapper>
           </>
         ) : (
-          <S.InfoText> 상단에서 나라를 선택하여 주세요.</S.InfoText>
+          <S.InfoText> {t("chooseCountry")}</S.InfoText>
         )}
       </S.MainInfoWrapper>
       <S.CaptionText>
-        데이터 불러온 날짜
+        {t("dataTime")}
         <br /> {globalInfo?.Date}
       </S.CaptionText>
     </S.TitleSection>

@@ -2,12 +2,17 @@ import * as S from "./style";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Country } from "../../types";
 import { thousandSeperator } from "../../helper";
+import { useTranslation } from "react-i18next";
+
 interface Props {
   countriesInfo: Array<Country> | undefined;
 }
+
 export default function WorldChart({
   countriesInfo,
 }: Props): React.ReactElement {
+  const { t } = useTranslation();
+
   const [rankIdx, setRankIdx] = useState<number>(0);
 
   const [rankList, setRankList] = useState<Array<ReactNode>>();
@@ -46,23 +51,23 @@ export default function WorldChart({
 
   return (
     <S.RankingSection>
-      <S.RankingTitle> 국가별 코로나 현황표 </S.RankingTitle>
+      <S.RankingTitle> {t("worldTable")} </S.RankingTitle>
       <S.RankingTable>
         <thead>
           <S.RankingHeadTr>
-            <S.RankingTh>순위</S.RankingTh>
-            <S.RankingTh>국가명</S.RankingTh>
-            <S.RankingWideTh>총 확진자</S.RankingWideTh>
-            <S.RankingWideTh>총 사망자</S.RankingWideTh>
-            <S.RankingTh>오늘 확진자</S.RankingTh>
-            <S.RankingTh>오늘 사망자</S.RankingTh>
+            <S.RankingTh></S.RankingTh>
+            <S.RankingTh>{t("country")}</S.RankingTh>
+            <S.RankingWideTh>{t("totalConfirmed")}</S.RankingWideTh>
+            <S.RankingWideTh>{t("totalDeaths")}</S.RankingWideTh>
+            <S.RankingTh>{t("todayConfirmed")}</S.RankingTh>
+            <S.RankingTh>{t("todayDeaths")}</S.RankingTh>
           </S.RankingHeadTr>
         </thead>
         <tbody>{rankList}</tbody>
       </S.RankingTable>
       {rankIdx <= 2 && (
         <S.ShowMoreButton onClick={() => setRankIdx(rankIdx + 1)}>
-          더보기
+          {t("showMore")}
         </S.ShowMoreButton>
       )}
     </S.RankingSection>

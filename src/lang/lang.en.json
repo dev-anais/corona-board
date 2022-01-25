@@ -1,3 +1,18 @@
 {
-  "test": "hello"
+  "titleName": "COVID-19",
+  "worldConfirmed": "World Confirmed",
+  "worldDeaths": "World Deaths",
+  "confirmed": "Confirmed",
+  "deaths": "Deaths",
+  "chooseCountry": "Please select country at the top.",
+  "dataTime": "Last update",
+  "worldTable": "World Table",
+  "country": "country",
+  "totalConfirmed": "Total Confirmed",
+  "totalDeaths": "Total Deaths",
+  "todayConfirmed": "Today Confirmed",
+  "todayDeaths": "Today Deaths",
+  "showMore": "Show more",
+  "selectedCountryChart": "COVID-19 Chart",
+  "pleaseSelectContry": "Select a country at the top to see a chart for a specific country."
 }

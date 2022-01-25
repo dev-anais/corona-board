@@ -20,6 +20,9 @@ export const InfoText = styled.p`
   height: 80px;
   width: 80vw;
   margin: 40px auto 0;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export const CaptionText = styled.p`
   text-align: right;
