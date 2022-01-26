@@ -16,7 +16,7 @@ const resources = {
 i18n.use(initReactI18next).init({
   resources: resources,
   lng: "en",
-  debug: true,
+  debug: false,
   keySeparator: false,
 });
 
