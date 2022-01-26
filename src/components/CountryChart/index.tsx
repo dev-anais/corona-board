@@ -36,12 +36,35 @@ export default function CountryChart({
 }: Props): React.ReactElement {
   const { t } = useTranslation();
   useEffect(() => {
-    const monthDate = new Date();
-    monthDate.setMonth(monthDate.getMonth() - 1);
-    const oneMonthData = countryDailyInfo?.filter(
-      (item) => new Date(item.Date) > monthDate
-    );
+    makeDateList();
+    makeChartData("initData");
+  }, [countryDailyInfo]);
 
+  const [monthChartInfo, setMonthChartInfo] = useState<OneMonthChartInfo>();
+
+  const [dateList, setDateList] = useState<Array<ShowingDate>>([]);
+
+  const [selectedDate, setSelectedDate] = useState<ShowingDate>();
+
+  useEffect(() => {
+    selectedDate && makeChartData(selectedDate);
+  }, [selectedDate]);
+
+  const makeChartData = (dateInfo: ShowingDate | "initData") => {
+    let oneMonthData;
+    if (dateInfo === "initData") {
+      const monthDate = new Date();
+      monthDate.setMonth(monthDate.getMonth() - 1);
+      oneMonthData = countryDailyInfo?.filter(
+        (item) => new Date(item.Date) > monthDate
+      );
+    } else {
+      oneMonthData = countryDailyInfo?.filter(
+        (item) =>
+          new Date(item.Date) >= new Date(dateInfo.startDate) &&
+          new Date(item.Date) <= new Date(dateInfo.endDate)
+      );
+    }
     if (oneMonthData) {
       setMonthChartInfo({
         label: oneMonthData?.map((item) =>
@@ -50,19 +73,37 @@ export default function CountryChart({
         Confirmed: oneMonthData?.map((item) => item.Confirmed),
         Deaths: oneMonthData?.map((item) => item.Deaths),
       });
-      const startDate = oneMonthData[0].Date;
-      const endDate = oneMonthData[oneMonthData.length - 1].Date;
+    }
+  };
 
-      setShowingDate({
+  const makeDateList = () => {
+    const monthDate = new Date();
+    const copiedDailyInfo = Array.from(countryDailyInfo || []);
+    const resultArray: Array<ShowingDate> = [];
+    if (copiedDailyInfo.length === 0) return;
+    while (copiedDailyInfo.length > 1) {
+      monthDate.setMonth(monthDate.getMonth() - 1);
+      const dateIdx = copiedDailyInfo.findIndex(
+        (item) => new Date(item.Date) >= monthDate
+      );
+      const startDate = copiedDailyInfo[dateIdx].Date;
+      const endDate = copiedDailyInfo[copiedDailyInfo.length - 1].Date;
+      resultArray.push({
         startDate: startDate.substring(0, startDate.indexOf("T")),
         endDate: endDate.substring(0, endDate.indexOf("T")),
       });
+      copiedDailyInfo.splice(dateIdx, copiedDailyInfo.length - 1);
     }
-  }, [countryDailyInfo]);
+    setDateList([...resultArray]);
+  };
 
-  const [monthChartInfo, setMonthChartInfo] = useState<OneMonthChartInfo>();
-
-  const [showingDate, setShowingDate] = useState<ShowingDate>();
+  const changeDate = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const startDate = e.target.value;
+    const selectedValue = dateList.filter(
+      (item) => item.startDate === startDate
+    )[0];
+    selectedValue && setSelectedDate({ ...selectedValue });
+  };
 
   const chartData = {
     labels: monthChartInfo?.label,
@@ -83,18 +124,19 @@ export default function CountryChart({
       },
     ],
   };
-
   return (
     <S.ChartSection>
       {monthChartInfo ? (
         <>
           <S.ChartTitle>{t("selectedCountryChart")}</S.ChartTitle>
           <S.OneCountryChartWrapper>
-            {showingDate && (
-              <S.CaptionText>
-                {showingDate.startDate} ~ {showingDate.endDate}
-              </S.CaptionText>
-            )}
+            <S.ChartDateSelect onChange={changeDate}>
+              {dateList?.map((dateList, idx) => (
+                <option key={idx} value={dateList.startDate}>
+                  {dateList.startDate} ~ {dateList.endDate}
+                </option>
+              ))}
+            </S.ChartDateSelect>
             <Chart type="bar" data={chartData} />
           </S.OneCountryChartWrapper>
         </>

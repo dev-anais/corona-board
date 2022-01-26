@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme } from "styled-tools";
+import { theme, palette } from "styled-tools";
 
 export const ChartSection = styled.section`
   padding: 32px 0 32px;
@@ -24,8 +24,19 @@ export const InfoText = styled.p`
     cursor: pointer;
   }
 `;
-export const CaptionText = styled.p`
-  text-align: right;
-  margin: 0;
-  ${theme("fontStyle.caption")};
+
+export const ChartDateSelect = styled.select`
+  width: 20vw;
+  min-width: 136px;
+  float: right;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: ${palette("green")};
+  border-color: ${palette("green")};
+  padding: 4px;
+  ${theme("fontStyle.body3")};
+  font-weight: bold;
+  border-radius: 4px;
+  margin: 0 10px 8px;
+  background-color: ${palette("dark_primary")};
 `;
