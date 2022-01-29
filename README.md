@@ -1,6 +1,8 @@
 # COVID DASH BOARD
 
-This project is made to provide corona virus statistics by country
+This project is made to provide corona virus statistics by country. This app is hosted on Heroku. Visit <a>https://lily-covid-board.herokuapp.com/</a>
+
+#### It may take a minute for this site to load. Because heroku is free hosting service. And please refresh for the first load.
 
 ![alt text](https://github.com/yuneunhye/corona-board/blob/main/src/assets/covid_video.gif?raw=true)
 
