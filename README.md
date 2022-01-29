@@ -21,7 +21,7 @@ Install all the file that you need to run this project.
 
 ## BELOW INSTRUCTION IS FROM CRA.
 
-### Because this app is made using RCA.
+Because this app is made using RCA.
 
 ### `yarn run start`
 
