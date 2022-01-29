@@ -1,12 +1,27 @@
-# Getting Started with Create React App
+# COVID DASH BOARD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is made to provide corona virus statistics by country
 
-## Available Scripts
+![alt text](https://github.com/yuneunhye/corona-board/blob/main/src/assets/covid_video.gif?raw=true)
 
-In the project directory, you can run:
+## What this app provide
 
-### `yarn start`
+✔️ Covid summary info\
+✔️ Covid world table\
+✔️ Covid Chart\
+✔️ Available in two languages, Korean and English\
+
+## Getting started
+
+### `npm install`
+
+Install all the file that you need to run this project.
+
+## BELOW INSTRUCTION IS FROM CRA.
+
+### Because this app is made using RCA.
+
+### `yarn run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
