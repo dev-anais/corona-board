@@ -11,7 +11,7 @@ This project is made to provide corona virus statistics by country. This app is 
 ✔️ Covid summary info\
 ✔️ Covid world table\
 ✔️ Covid Chart\
-✔️ Available in two languages, Korean and English\
+✔️ Available in two languages, Korean and English
 
 ## Getting started
 
