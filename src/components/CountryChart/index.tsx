@@ -6,27 +6,11 @@ import {
   OneCountryInfoResponse,
   ShowingDate,
 } from "../../types";
-import {
-  Chart as ChartJS,
-  LinearScale,
-  CategoryScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Legend,
-  Tooltip,
-} from "chart.js";
+import { Chart as ChartJS, registerables } from "chart.js";
 import { Chart } from "react-chartjs-2";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Tooltip,
-  Legend
-);
+ChartJS.register(...registerables);
+
 interface Props {
   countryDailyInfo: Array<OneCountryInfoResponse> | undefined;
 }
